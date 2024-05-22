@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>第二篇 | 真的不要叫工程師腦袋想創意的東西</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="228. Summary RangesYou are given a sorted unique integer array nums. A range [a,b] is the set of all integers from a to b (inclusive). Return the smallest sorted list of ranges that cover all the numb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二篇">
+<meta property="og:url" content="https://ming0413.github.io/myHexo/2024/05/22/%E7%AC%AC%E4%BA%8C%E7%AF%87/index.html">
+<meta property="og:site_name" content="真的不要叫工程師腦袋想創意的東西">
+<meta property="og:description" content="228. Summary RangesYou are given a sorted unique integer array nums. A range [a,b] is the set of all integers from a to b (inclusive). Return the smallest sorted list of ranges that cover all the numb">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-22T14:48:33.000Z">
+<meta property="article:modified_time" content="2024-05-22T14:58:07.753Z">
+<meta property="article:author" content="David Hsieh">
+<meta property="article:tag" content="golang">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="雜七雜八">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/myHexo/atom.xml" title="真的不要叫工程師腦袋想創意的東西" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/myHexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/myHexo/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/myHexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/myHexo/" id="logo">真的不要叫工程師腦袋想創意的東西</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/myHexo/" id="subtitle">內容是以前寫leetcode紀錄</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/myHexo/">首頁desu</a>
+        
+          <a class="main-nav-link" href="/myHexo/archives">文章desu</a>
+        
+          <a class="main-nav-link" href="/myHexo/about">我desu</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/myHexo/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ming0413.github.io/myHexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-第二篇" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/myHexo/2024/05/22/%E7%AC%AC%E4%BA%8C%E7%AF%87/" class="article-date">
+  <time class="dt-published" datetime="2024-05-22T14:48:33.000Z" itemprop="datePublished">2024-05-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      第二篇
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="228-Summary-Ranges"><a href="#228-Summary-Ranges" class="headerlink" title="228. Summary Ranges"></a>228. Summary Ranges</h3><p>You are given a sorted unique integer array nums.</p>
+<p>A range [a,b] is the set of all integers from a to b (inclusive).</p>
+<p>Return the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.</p>
+<p>Each range [a,b] in the list should be output as:</p>
+<p>“a-&gt;b” if a !&#x3D; b<br>“a” if a &#x3D;&#x3D; b</p>
+<p>Example 1:</p>
+<p>Input: nums &#x3D; [0,1,2,4,5,7]<br>Output: [“0-&gt;2”,”4-&gt;5”,”7”]<br>Explanation: The ranges are:<br>[0,2] –&gt; “0-&gt;2”<br>[4,5] –&gt; “4-&gt;5”<br>[7,7] –&gt; “7”<br>Example 2:</p>
+<p>Input: nums &#x3D; [0,2,3,4,6,8,9]<br>Output: [“0”,”2-&gt;4”,”6”,”8-&gt;9”]<br>Explanation: The ranges are:<br>[0,0] –&gt; “0”<br>[2,4] –&gt; “2-&gt;4”<br>[6,6] –&gt; “6”<br>[8,9] –&gt; “8-&gt;9”</p>
+<p>Constraints:</p>
+<p>0 &lt;&#x3D; nums.length &lt;&#x3D; 20<br>-2<sup>31</sup>&lt;&#x3D; nums[i] &lt;&#x3D; 2<sup>31</sup> - 1<br>All the values of nums are unique.<br>nums is sorted in ascending order.</p>
+<h4 id="code"><a href="#code" class="headerlink" title="code:"></a>code:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">func summaryRanges(nums []int) []string &#123;</span><br><span class="line">	result := []string&#123;&#125;</span><br><span class="line">	r := &quot;&quot;</span><br><span class="line"></span><br><span class="line">	for i := 0; i &lt; len(nums); &#123;</span><br><span class="line">		r = r + strconv.Itoa(nums[i])</span><br><span class="line">		j := i + 1</span><br><span class="line">		for ; j &lt; len(nums) &amp;&amp; nums[j]-nums[j-1] == 1; j++ &#123;</span><br><span class="line">		&#125;</span><br><span class="line">		if j-1 &gt; i &#123;</span><br><span class="line">			r = r + &quot;-&gt;&quot; + strconv.Itoa(nums[j-1])</span><br><span class="line">		&#125;</span><br><span class="line">		result = append(result, r)</span><br><span class="line">		r = &quot;&quot;</span><br><span class="line">		i = j</span><br><span class="line">	&#125;</span><br><span class="line">	return result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ming0413.github.io/myHexo/2024/05/22/%E7%AC%AC%E4%BA%8C%E7%AF%87/" data-id="clwhyut22000e0wvpeatvhj69" data-title="第二篇" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/myHexo/tags/golang/" rel="tag">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/myHexo/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/myHexo/tags/%E9%9B%9C%E4%B8%83%E9%9B%9C%E5%85%AB/" rel="tag">雜七雜八</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/myHexo/2024/05/22/%E4%BE%86%E5%80%8B%E5%9C%96%E7%89%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          來個圖片
+        
+      </div>
+    </a>
+  
+  
+    <a href="/myHexo/2024/05/22/%E7%AC%AC%E4%B8%80%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">第一篇</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/myHexo/tags/golang/" rel="tag">golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/myHexo/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/myHexo/tags/picture/" rel="tag">picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/myHexo/tags/%E5%9C%96%E7%89%87/" rel="tag">圖片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/myHexo/tags/%E9%9B%9C%E4%B8%83%E9%9B%9C%E5%85%AB/" rel="tag">雜七雜八</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/myHexo/tags/golang/" style="font-size: 20px;">golang</a> <a href="/myHexo/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/myHexo/tags/picture/" style="font-size: 10px;">picture</a> <a href="/myHexo/tags/%E5%9C%96%E7%89%87/" style="font-size: 10px;">圖片</a> <a href="/myHexo/tags/%E9%9B%9C%E4%B8%83%E9%9B%9C%E5%85%AB/" style="font-size: 20px;">雜七雜八</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/myHexo/archives/2024/05/">五月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/myHexo/2024/05/22/%E4%BE%86%E5%80%8B%E5%9C%96%E7%89%87/">來個圖片</a>
+          </li>
+        
+          <li>
+            <a href="/myHexo/2024/05/22/%E7%AC%AC%E4%BA%8C%E7%AF%87/">第二篇</a>
+          </li>
+        
+          <li>
+            <a href="/myHexo/2024/05/22/%E7%AC%AC%E4%B8%80%E7%AF%87/">第一篇</a>
+          </li>
+        
+          <li>
+            <a href="/myHexo/2024/05/22/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 David Hsieh<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/myHexo/" class="mobile-nav-link">首頁desu</a>
+  
+    <a href="/myHexo/archives" class="mobile-nav-link">文章desu</a>
+  
+    <a href="/myHexo/about" class="mobile-nav-link">我desu</a>
+  
+</nav>
+    
+
+
+<script src="/myHexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/myHexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/myHexo/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
